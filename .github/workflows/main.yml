@@ -10,8 +10,8 @@ on:
   workflow_dispatch:
     inputs:
       tags:
-        description: 'container build test'
-  jobs:
+        description: 'container build test' 
+jobs:
     build:
       runs-on: ubuntu-latest
       steps:
