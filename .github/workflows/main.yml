@@ -1,0 +1,51 @@
+version: '3'
+
+tasks:
+  default:
+    desc: Compile all tex files to pdf
+    cmds:
+      - task filtr
+      - task fft
+      - task algebra
+      - task analiza
+      - task toizo
+  filtr:
+    desc: Compile filtr.tex to pdf
+    sources:
+      - src/filtr/*
+      - mystd.sty
+    cmds:
+      - cd src/filtr && arara filtr.tex
+      - cd pdf && rm -f *.aux *.out *.synctex.gz *.toc *.fls *.fdb_latexmk
+  fft:
+    desc: Compile fft.tex to pdf
+    sources:
+      - src/fft/*
+      - mystd.sty
+    cmds:
+      - cd src/fft && arara fft.tex
+      - cd pdf && rm -f *.aux *.out *.synctex.gz *.toc *.fls *.fdb_latexmk
+  algebra:
+    desc: Compile algebra.tex to pdf
+    sources:
+      - src/algebra/*
+      - mystd.sty
+    cmds:
+      - cd src/algebra && arara algebra.tex
+      - cd pdf && rm -f *.aux *.out *.synctex.gz *.toc *.fls *.fdb_latexmk
+  analiza:
+    desc: Compile analiza.tex to pdf
+    sources:
+      - src/analiza/*
+      - mystd.sty
+    cmds:
+      - cd src/analiza && arara analiza.tex
+      - cd pdf && rm -f *.aux *.out *.synctex.gz *.toc *.fls *.fdb_latexmk
+  toizo:
+    desc: Compile toizo.tex to pdf
+    sources:
+      - src/toizo/*
+      - mystd.sty
+    cmds:
+      - cd src/toizo && arara toizo.tex
+      - cd pdf && rm -f *.aux *.out *.synctex.gz *.toc *.fls *.fdb_latexmk
