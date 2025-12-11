@@ -1,4 +1,25 @@
-steps:
+---
+name: build
+
+on:
+#  schedule:
+#    - cron: "0 7 * * 1,4"
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'container build test'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0steps:
   - name: Checkout repository
     uses: actions/checkout@v4
 
