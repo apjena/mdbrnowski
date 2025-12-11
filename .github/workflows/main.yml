@@ -1,30 +1,32 @@
-name: 'C-Chain Re-Execution Benchmark'
-description: 'Run C-Chain re-execution benchmark'
-
-inputs:
-  task:
-    description: 'Task name to execute from Taskfile.yml. Leave empty to use custom inputs below.'
-    default: ''
+name: Compile LaTeX with Taskfile
 
 on:
   push:
     branches:
-      - master
-  workflow_dispatch:
-    inputs:
-      tags:
-        description: 'container build test' 
+      - main
+
 jobs:
-    build:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v3
+  build-latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-        - name: Install Task
-          uses: go-task/setup-task@v1
-          with:
-             version: 3.x # Use a specific version or range
+      - name: Setup Task (go-task)
+        uses: arduino/setup-task@v1 # Action to install the 'task' CLI tool
+        with:
+          version: 3.x
 
-        - name: Run build task
-          run: task build # Executes the 'build' task defined in your Taskfile
+      - name: Install TeX Live environment
+        # Use a full TeX Live environment, as the default GitHub runner image is minimal
+        run: sudo apt-get update && sudo apt-get install -y texlive-full texlive-publishers texlive-science texlive-lang-european latexmk
+
+      - name: Run Task to Compile LaTeX
+        run: task build
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-pdf
+          path: main.pdf # Replace main.pdf with the name of your generated PDF
+
