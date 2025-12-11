@@ -11,17 +11,17 @@ on:
     inputs:
       tags:
         description: 'container build test'
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
 
-      - name: Install Task
-        uses: go-task/setup-task@v1
-        with:
-           version: 3.x # Use a specific version or range
+        - name: Install Task
+          uses: go-task/setup-task@v1
+          with:
+             version: 3.x # Use a specific version or range
 
-      - name: Run build task
-        run: task build # Executes the 'build' task defined in your Taskfile
+        - name: Run build task
+          run: task build # Executes the 'build' task defined in your Taskfile
