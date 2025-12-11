@@ -22,11 +22,11 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y texlive-full texlive-publishers texlive-science texlive-lang-european latexmk
 
       - name: Run Task to Compile LaTeX
-        run: task build
+        run: task ''
 
-      - name: Upload PDF Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: compiled-pdf
-          path: main.pdf # Replace main.pdf with the name of your generated PDF
+    #  - name: Upload PDF Artifact
+    #    uses: actions/upload-artifact@v4
+    #    with:
+    #      name: compiled-pdf
+    #      path: main.pdf # Replace main.pdf with the name of your generated PDF
 
